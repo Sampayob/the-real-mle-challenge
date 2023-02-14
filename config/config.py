@@ -1,5 +1,6 @@
 from pathlib import Path
 
+
 # Directories
 DIR_REPO = Path(__file__).parent.parent.absolute()
 DIR_CONFIG = Path(DIR_REPO, "config")
