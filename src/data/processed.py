@@ -31,8 +31,11 @@ def select_subset(df: DataFrame) -> DataFrame:
 def price_drop_listings(df: DataFrame) -> DataFrame:
     """Remove the listings where price feature is between 0 and 10 dollars."""
     df['price'] = df['price'].str.extract(r"(\d+).")
-    df['price'] = df['price'].astype(int)
-    return df[df['price'] >= 10]
+    try:
+        df['price'] = df['price'].astype(int)
+        return df[df['price'] >= 10]
+    except ValueError as e:
+        print('Some string value/s not have digit characters to extract: ', e)
 
 
 def category_feature(price: Series) -> Series:
@@ -80,11 +83,11 @@ def feature_engineering(df: DataFrame, data_subset: bool =True) -> DataFrame:
 
 def preprocess() -> DataFrame:
     """Preprocess raw DataFrame."""
-    df_prepocess = pd.read_csv(str(FILEPATH_DATA_RAW), low_memory=False)
-    df_prepocess = feature_engineering(df_prepocess, data_subset=True)
-    df_prepocess.to_csv(str(FILEPATH_DATA_PROCESSED))
+    df_processed = pd.read_csv(str(FILEPATH_DATA_RAW), low_memory=False)
+    df_processed = feature_engineering(df_processed, data_subset=True)
+    df_processed.to_csv(str(FILEPATH_DATA_PROCESSED))
 
-    return df_prepocess
+    return df_processed
 
 
 if __name__ == '__main__':
