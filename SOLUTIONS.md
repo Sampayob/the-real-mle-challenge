@@ -23,15 +23,15 @@ The code inside `01-exploratory-data-analysis.ipynb` and `02-explore-classifier-
 
 ## Challenge 2 - Build an API
 - Created a Flask API to serve the model inside the `api` directory:
-        - `app.py`: script from which the Flask app is launched. It contains a GET method (`/`) and a POST method (`/predict_category`) which use the previously trained model to make a predict based on new input data.
-        - `prediction.py`: script which have the modules to process an inference and return a prediction. 
-        - `simple_classifier.pkl`: classification model previously trained. It used only the subset of features signaled in `02-explore-classifier-model.ipynb`: `FEATURE_NAMES`.
-        - `args.json`: same set of dictionaries as in `config\` which contain information for the inference preprocess to improve reproducibility.
-        - `tests\test.py`: test the two methods present in the Flask app `app.py`.
+    - `app.py`: script from which the Flask app is launched. It contains a GET method (`/`) and a POST method (`/predict_category`) which use the previously trained model to make a predict based on new input data.
+    - `prediction.py`: script which have the modules to process an inference and return a prediction. 
+    - `simple_classifier.pkl`: classification model previously trained. It used only the subset of features signaled in `02-explore-classifier-model.ipynb`: `FEATURE_NAMES`.
+    - `args.json`: same set of dictionaries as in `config\` which contain information for the inference preprocess to improve reproducibility.
+    - `tests\test.py`: test the two methods present in the Flask app `app.py`.
         
-        *I had to replicate some previous code in the script `prediction.py` and move the model (`simple_classifier.pkl`) and the arguments json (`args.json`) which contains information for the inference preprocess because `ModuleNameError` while importing directories and modules like `src` or `config`.
+    *I had to replicate some previous code in the script `prediction.py` and move the model (`simple_classifier.pkl`) and the arguments json (`args.json`) which contains information for the inference preprocess because `ModuleNameError` while importing directories and modules like `src` or `config`.
 
-- The API was tested making a GET and a POST request to 0.0.0.0:8080/ through POSTMAN with one data input in JSON format.
+- The API was tested making a GET and a POST request to `0.0.0.0:8080/` through POSTMAN with one data input in JSON format.
 
 
 ## Challenge 3 - Dockerize your solution
