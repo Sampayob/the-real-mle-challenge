@@ -9,7 +9,6 @@ from config.config import (DIR_DATA_PROCESSED,
 
 
 def test_preprocess():
-       "Test `preprocessed_listings.csv' file generation."
        preprocess()
        assert 'preprocessed_listings.csv' in os.listdir(DIR_DATA_PROCESSED), \
               '`preprocessed_listings.csv` was not generated.'
@@ -19,13 +18,15 @@ def test_preprocess():
 
        assert 'bathrooms' in data_processed.columns, '`bathrooms` col not in DataFrame.'
        assert 'category' in data_processed.columns, '`category` col not in DataFrame.'
+       assert all(x in data_processed['category'].unique().tolist() for x in [0, 1, 2, 3]), '`category` labels are missing.'
        assert is_numeric_dtype(data_processed['price']), '`price` col was not converted to a numeric type.' 
+       assert len(data_processed[data_processed['price'] < 10]) == 0, '`price` col have values less than 10.'
        assert all(col in data_processed.columns for col in ['TV',
-                                                        'Internet',
-                                                        'Air_conditioning',
-                                                        'Kitchen',
-                                                        'Heating',
-                                                        'Wifi',
-                                                        'Elevator',
-                                                        'Breakfast']), \
-                                                        'All or some cols created from `amenities` col are missing.'
+                                                            'Internet',
+                                                            'Air_conditioning',
+                                                            'Kitchen',
+                                                            'Heating',
+                                                            'Wifi',
+                                                            'Elevator',
+                                                            'Breakfast']), \
+                                                            'All or some cols created from `amenities` col are missing.'

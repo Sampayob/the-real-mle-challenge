@@ -18,7 +18,6 @@ inputs =  {
 
 
 def test_predict():
-    """Test `predict` method from `src.models.main`."""
     result = predict(inputs)
 
     assert isinstance(result, str), 'Predicted value/s is not a categorical value.'
