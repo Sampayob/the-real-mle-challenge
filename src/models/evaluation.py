@@ -19,7 +19,7 @@ def ovr_roc_auc_score(clf: BaseEstimator,
 
 
 def plot_feature_importance(clf: BaseEstimator, X_train: DataFrame) -> None:
-    """Plot feature importance."""
+    """Plot feature importance bar plot."""
     importances = clf.feature_importances_
     indices = np.argsort(importances)[::-1]
     features = X_train.columns[indices]
