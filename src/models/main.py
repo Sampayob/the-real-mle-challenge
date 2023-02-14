@@ -11,8 +11,7 @@ from config.config import (FILEPATH_MODEL,
 from src.models.train import train
 from src.models.predict import predict_pipeline
 from src.models.evaluation import (ovr_roc_auc_score,
-                                   custom_classificaton_report,
-                                  )
+                                   custom_classificaton_report)
 from src.utils.utils import load_json
 
 
@@ -25,9 +24,12 @@ def train_model():
     # Train
     args = load_json(str(FILEPATH_ARGS))
     train_artifatcs = train(df, args)
-    model = train_artifatcs['model']
-    pickle.dump(model, open(FILEPATH_MODEL, 'wb'))
-    return train_artifatcs
+    if 'model' in train_artifatcs:
+        model = train_artifatcs['model']
+        pickle.dump(model, open(str(FILEPATH_MODEL), 'wb'))
+        return train_artifatcs
+    else:
+        raise ValueError("'model' is not present after train() in train_artifacts dict.")
 
 
 def evaluate_model(model, X_test, y_test):
@@ -53,5 +55,8 @@ def predict(inputs: dict) -> array:
     """Make a prediction from trained model."""
     args = load_json(str(FILEPATH_ARGS))
     result = predict_pipeline(inputs, args)
-    decoded_result = args['label_encoding'][str(int(result))]
-    return decoded_result
+    if 'label_encoding' in args:
+        decoded_result = args['label_encoding'][str(int(result))]
+        return decoded_result
+    else:
+        raise ValueError("'label encoding' not in args.json file.")
