@@ -19,23 +19,26 @@ The code inside `01-exploratory-data-analysis.ipynb` and `02-explore-classifier-
     - `test_predict.py`: test model predict method launched from `src\models\main.py` passing some input data to return a prediction.
 - `\utils` directory:
     - `utils.py`: script which contains helper functions.
+- `setup.py` and ``__init__.py` files: scripts to convert the root directory into a package and make it easier to import modules.
+- `requirements.txt`: list of dependencies/libraries.
+
+*The classification model only use the subset of features signaled in `02-explore-classifier-model.ipynb`
 
 
 ## Challenge 2 - Build an API
 - Created a Flask API to serve the model inside the `api` directory:
     - `app.py`: script from which the Flask app is launched. It contains a GET method (`/`) and a POST method (`/predict_category`) which use the previously trained model to make a predict based on new input data.
-    - `prediction.py`: script which have the modules to process an inference and return a prediction. 
-    - `simple_classifier.pkl`: classification model previously trained. It used only the subset of features signaled in `02-explore-classifier-model.ipynb`: `FEATURE_NAMES`.
-    - `args.json`: same set of dictionaries as in `config\` which contain information for the inference preprocess to improve reproducibility.
-    - `tests\test.py`: test the two methods present in the Flask app `app.py`.
-        
-    *I had to replicate some previous code in the script `prediction.py` and move the model (`simple_classifier.pkl`) and the arguments json (`args.json`) which contains information for the inference preprocess because `ModuleNameError` while importing directories and modules like `src` or `config`.
 
-- The API was tested making a GET and a POST request to `0.0.0.0:8080/` through POSTMAN with one data input in JSON format.
+- `\tests\test_api.py`: test flask app which test the available api methods.
+- The API was also tested making a GET and a POST request to `0.0.0.0:8080/` through POSTMAN with one data input in JSON format.
 
 
 ## Challenge 3 - Dockerize your solution
-- The Flask API can be deployed on a Docker container previously building a Docker image based on the Dockerfile in `/api/`. The commands to build the image and launch de Docker container from the `/api/` directory are:
+- The Flask API can be deployed on a Docker container previously building a Docker image based on the Dockerfile in root (`\`). 
+    - `Dockerfile`: script which contains the instructions to create a Docker image.
+    - `.dockignore`: script which contains the files and directories to ignore when building the Docker image. It has the same content as in `.gitignore`.
+
+The commands to build the image and launch de Docker container are:
     1. Build Docker image: `docker build -t ny-estimator .`
     2. Launch Docker container (first time): `docker build -d -p 8080:8080 --name ny-estimator-container ny-estimator`
     3. Launch Docker container (subsequent times): `docker build -d -p 8080:8080 ny-estimator`

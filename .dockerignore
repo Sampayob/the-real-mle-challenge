@@ -1,8 +1,8 @@
-*
-!config/
-!data/
-!src/
-!test/
-!models/
-!setup.py
-!requirements.txt
+Pipfile
+
+.vscode/
+**/__pycache__
+**/.pytest_cache
+**/build
+**/*.egg-info
+*.egg
