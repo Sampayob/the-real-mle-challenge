@@ -3,6 +3,8 @@ import json
 import pytest
 
 from src.api.app import flask_app
+from src.utils.utils import load_json
+from config.config import FILEPATH_ARGS
 
 
 @pytest.fixture
@@ -36,7 +38,8 @@ def test_request_predict(app):
                         content_type='application/json')
 
     response = json.loads(response.data)
+    args = load_json(FILEPATH_ARGS)
 
     assert isinstance(response, dict), 'response is not a dict.'
-    assert any(response['price_category'] in category for category in ['Low', 'Mid', 'High', 'Luxury']), \
+    assert any(response['price_category'] in category for category in args['label_encoding'].values()), \
          'response is not among possible categories.'
