@@ -19,7 +19,7 @@ The code inside `01-exploratory-data-analysis.ipynb` and `02-explore-classifier-
     - `test_predict.py`: test model predict method launched from `src\models\main.py` passing some input data to return a prediction.
 - `\utils` directory:
     - `utils.py`: script which contains helper functions.
-- `setup.py` and ``__init__.py` files: scripts to convert the root directory into a package and make it easier to import modules.
+- `setup.py` and `__init__.py` files: scripts to transform the root directory and subdirectories into a package and make it easier to import modules.
 - `requirements.txt`: list of dependencies/libraries.
 
 *The classification model only use the subset of features signaled in `02-explore-classifier-model.ipynb`
@@ -38,7 +38,7 @@ The code inside `01-exploratory-data-analysis.ipynb` and `02-explore-classifier-
     - `Dockerfile`: script which contains the instructions to create a Docker image.
     - `.dockignore`: script which contains the files and directories to ignore when building the Docker image. It has the same content as in `.gitignore`.
 
-The commands to build the image and launch de Docker container are:
+- The commands to build the image and launch de Docker container are:
     1. Build Docker image: `docker build -t ny-estimator .`
     2. Launch Docker container (first time): `docker build -d -p 8080:8080 --name ny-estimator-container ny-estimator`
     3. Launch Docker container (subsequent times): `docker build -d -p 8080:8080 ny-estimator`
