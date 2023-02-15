@@ -13,12 +13,12 @@ The code inside `01-exploratory-data-analysis.ipynb` and `02-explore-classifier-
         - `train.py`: prepara de processed data (encoding categorical features, split data in train-test...) and train the classification model.
         - `evaluation.py`: contains different functions to get metrics and plots to evaluate the trained model (accuracy, ROC AUC, confussion matrix...).
         - `predict.py`: preprocess input data to make a prediction loading the previously trained model.
-- `\tests` directory to manage tests:
+        - `\utils\utils.py`: script which contains helper functions.
+- `\tests` directory to manage tests:       
     - `test_data.py`: test data preprocess to generate `preprocessed_listings.csv`.
     - `test_train.py`: test model training methods launched from `src\models\main.py` as well as evaluation methods.
     - `test_predict.py`: test model predict method launched from `src\models\main.py` passing some input data to return a prediction.
-- `\utils` directory:
-    - `utils.py`: script which contains helper functions.
+
 - `setup.py` and `__init__.py` files: scripts to transform the root directory and subdirectories into a package and make it easier to import modules.
 - `requirements.txt`: list of dependencies/libraries.
 
