@@ -17,7 +17,7 @@ def setup(df: DataFrame, args: dict) -> tuple:
     y = df['category'].values
     if X.ndim != 2:
         raise TypeError("args['features_selected'] is not a feature list.")
-    X_train, X_test, y_train, y_test = train_test_split(X, y, **args['train_test_split_args'])
+    X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, **args['train_test_split_args'])
     return X_train, X_test, y_train, y_test
 
 
