@@ -1,0 +1,8 @@
+*
+!config/
+!data/
+!src/
+!test/
+!models/
+!setup.py
+!requirements.txt

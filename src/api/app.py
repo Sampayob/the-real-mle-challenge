@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify
 
-from prediction import predict
+# from prediction import predict
 
-
+from src.models.main import predict
 
 def flask_app():
     """Flask app which deploys NY Estimator classification model."""
